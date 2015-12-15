@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import six
+
 import datetime
 import sys
 import math
@@ -11,7 +13,7 @@ from chainer import FunctionSet, Variable, cuda, functions, optimizers
 
 
 def trace(text):
-    print(datetime.datetime.now(), '...', text, file=sys.stderr)
+    six.print_(datetime.datetime.now(), '...', text, file=sys.stderr)
 
 
 def make_var(array, dtype=np.float32):
@@ -93,29 +95,29 @@ def save_rnnlm_model(filename, n_vocab, n_embed, n_hidden, vocab, model):
     model.to_cpu()
 
     with open(filename, 'w') as fp:
-        print(n_vocab, file=fp)
-        print(n_embed, file=fp)
-        print(n_hidden, file=fp)
+        six.print_(n_vocab, file=fp)
+        six.print_(n_embed, file=fp)
+        six.print_(n_hidden, file=fp)
 
         for k, v in vocab.items():
             if v == 0:
                 continue
-            print('%s %d' % (k, v), file=fp)
+            six.print_('%s %d' % (k, v), file=fp)
         
         for row in model.w_xe.W:
-            print(dlm.join(fmt % x for x in row), file=fp)
+            six.print_(dlm.join(fmt % x for x in row), file=fp)
         
         for row in model.w_eh.W:
-            print(dlm.join(fmt % x for x in row), file=fp)
-        print(dlm.join(fmt % x for x in model.w_eh.b), file=fp)
+            six.print_(dlm.join(fmt % x for x in row), file=fp)
+        six.print_(dlm.join(fmt % x for x in model.w_eh.b), file=fp)
         
         for row in model.w_hh.W:
-            print(dlm.join(fmt % x for x in row), file=fp)
-        print(dlm.join(fmt % x for x in model.w_hh.b), file=fp)
+            six.print_(dlm.join(fmt % x for x in row), file=fp)
+        six.print_(dlm.join(fmt % x for x in model.w_hh.b), file=fp)
         
         for row in model.w_hy.W:
-            print(dlm.join(fmt % x for x in row), file=fp)
-        print(dlm.join(fmt % x for x in model.w_hy.b), file=fp)
+            six.print_(dlm.join(fmt % x for x in row), file=fp)
+        six.print_(dlm.join(fmt % x for x in model.w_hy.b), file=fp)
     
     model.to_gpu()
 
@@ -153,7 +155,7 @@ def parse_args():
         if (args.minibatch < 1): raise ValueError('you must set --minibatch >= 1')
     except Exception as ex:
         p.print_usage(file=sys.stderr)
-        print(ex, file=sys.stderr)
+        six.print_(ex, file=sys.stderr)
         sys.exit()
 
     return args

@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import six
+
 import sys
 import math
 import numpy as np
@@ -194,7 +196,7 @@ def parse_args():
         if args.generation_limit < 1: raise ValueError('you must set --generation-limit >= 1')
     except Exception as ex:
         p.print_usage(file=sys.stderr)
-        print(ex, file=sys.stderr)
+        six.print_(ex, file=sys.stderr)
         sys.exit()
 
     return args
@@ -254,7 +256,7 @@ def test_model(args):
             for hyp in hyp_batch:
                 hyp.append('</s>')
                 hyp = hyp[:hyp.index('</s>')]
-                print(' '.join(hyp), file=fp)
+                six.print_(' '.join(hyp), file=fp)
 
             generated += K
 

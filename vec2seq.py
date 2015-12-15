@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 #import my_settings
+import six
 
 import sys
 import math
@@ -14,9 +15,7 @@ from util.functions import trace, fill_batch
 from util.model_file import ModelFile
 from util.vocabulary import Vocabulary
 
-from util.chainer_cpu_wrapper import wrapper
-#from util.chainer_gpu_wrapper import wrapper
-
+from util.chainer_wrapper import wrapper
    
 class EncoderDecoderModel:
     def __init__(self):
@@ -204,7 +203,7 @@ def parse_args():
         if args.generation_limit < 1: raise ValueError('you must set --generation-limit >= 1')
     except Exception as ex:
         p.print_usage(file=sys.stderr)
-        print(ex, file=sys.stderr)
+        six.print_(ex, file=sys.stderr)
         sys.exit()
 
     return args
@@ -275,7 +274,7 @@ def test_model(args):
             for hyp in hyp_batch:
                 hyp.append('</s>')
                 hyp = hyp[:hyp.index('</s>')]
-                print(' '.join(hyp), file=fp)
+                six.print_(' '.join(hyp), file=fp)
 
             generated += K
 

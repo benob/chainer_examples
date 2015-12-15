@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import six
+
 import sys
 import math
 import numpy as np
@@ -163,8 +165,8 @@ class AttentionalTranslationModel:
         accum_loss = wrapper.zeros(()) if is_training else None
         
         #for n in range(src_len):
-        #    print(src_batch[0][n], end=' ')
-        #print()
+        #    six.print_(src_batch[0][n], end=' ')
+        #six.print_()
 
         for l in range(trg_len):
             # calculate attention weights
@@ -194,7 +196,7 @@ class AttentionalTranslationModel:
                 #elif zxcv > 0.3: asdf='+'
                 #elif zxcv > 0.1: asdf='.'
                 #else: asdf=' '
-                #print(asdf * len(src_batch[0][n]), end=' ')
+                #six.print_(asdf * len(src_batch[0][n]), end=' ')
 
             # generate next word
             c, s_p = lstm(c, m.w_yp(s_y) + m.w_pp(s_p) + m.w_cp(s_c) + m.w_dp(s_d))
@@ -203,7 +205,7 @@ class AttentionalTranslationModel:
             for k in range(batch_size):
                 hyp_batch[k].append(trg_itos(output[k]))
 
-            #print(hyp_batch[0][-1])
+            #six.print_(hyp_batch[0][-1])
             
             if is_training:
                 s_t = wrapper.make_var([trg_stoi(trg_batch[k][l + 1]) for k in range(batch_size)], dtype=np.int32)
@@ -270,7 +272,7 @@ def parse_args():
         if args.generation_limit < 1: raise ValueError('you must set --generation-limit >= 1')
     except Exception as ex:
         p.print_usage(file=sys.stderr)
-        print(ex, file=sys.stderr)
+        six.print_(ex, file=sys.stderr)
         sys.exit()
 
     return args
@@ -330,7 +332,7 @@ def test_model(args):
             for hyp in hyp_batch:
                 hyp.append('</s>')
                 hyp = hyp[:hyp.index('</s>')]
-                print(' '.join(hyp), file=fp)
+                six.print_(' '.join(hyp), file=fp)
 
             generated += K
 

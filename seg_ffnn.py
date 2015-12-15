@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import six
+
 import sys
 import math
 import numpy as np
@@ -143,7 +145,7 @@ def parse_args():
         if args.context < 1: raise ValueError('you must set --context >= 1')
     except Exception as ex:
         p.print_usage(file=sys.stderr)
-        print(ex, file=sys.stderr)
+        six.print_(ex, file=sys.stderr)
         sys.exit()
 
     return args
@@ -207,11 +209,11 @@ def test_model(args):
         for text in fp:
             letters = ''.join(text.split())
             if not letters:
-                print()
+                six.print_()
                 continue
             scores = model.predict(text)
             hyp = make_hyp(letters, scores)
-            print(hyp)
+            six.print_(hyp)
 
     trace('finished.')
 

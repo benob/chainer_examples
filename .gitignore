@@ -5,3 +5,4 @@ model
 nohup.out
 test
 my_settings.py
+*.pyc

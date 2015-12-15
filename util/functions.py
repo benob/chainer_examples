@@ -1,8 +1,9 @@
+import six
 import sys
 import datetime
 
 def trace(*args):
-    print(datetime.datetime.now(), '...', *args, file=sys.stderr)
+    six.print_(datetime.datetime.now(), '...', *args, file=sys.stderr)
     sys.stderr.flush()
 
 def fill_batch(batch, token='</s>'):

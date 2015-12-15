@@ -1,3 +1,4 @@
+import six
 from collections import defaultdict
 
 
@@ -40,9 +41,9 @@ class Vocabulary:
         return self
 
     def save(self, fp):
-        print(self.__size, file=fp)
+        six.print_(self.__size, file=fp)
         for i in range(self.__size):
-            print(self.__itos[i], file=fp)
+            six.print_(self.__itos[i], file=fp)
 
     @staticmethod
     def load(line_gen):

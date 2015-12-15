@@ -1,3 +1,4 @@
+import six
 from .functions import vtos, stov
 
 class ModelFile:
@@ -12,7 +13,7 @@ class ModelFile:
         return False
 
     def write(self, x):
-        print(x, file=self.__fp)
+        six.print_(x, file=self.__fp)
 
     def __write_vector(self, x):
         self.write(vtos(x))
