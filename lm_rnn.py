@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-import my_settings
-
 import datetime
 import sys
 import math

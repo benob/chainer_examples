@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-import my_settings
-
 import sys
 import math
 import numpy as np
@@ -15,8 +13,7 @@ from util.functions import trace, fill_batch2
 from util.model_file import ModelFile
 from util.vocabulary import Vocabulary
 
-#from util.chainer_cpu_wrapper import wrapper
-from util.chainer_gpu_wrapper import wrapper
+from util.chainer_wrapper import wrapper
 
    
 class AttentionalTranslationModel:
